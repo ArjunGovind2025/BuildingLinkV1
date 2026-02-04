@@ -1,12 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  output: 'export',
-  distDir: 'out',
+  // No output: 'export' — dynamic /jobs/[id] routes require server mode. Deploy to Vercel (or any Node host).
   images: {
     unoptimized: true,
   },
-  // Static export: set NEXT_PUBLIC_BACKEND_URL so API calls go to your backend (e.g. Railway).
 };
 
 module.exports = nextConfig;
