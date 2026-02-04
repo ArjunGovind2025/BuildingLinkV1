@@ -1,9 +1,11 @@
 #!/bin/bash
 set -e
 
-# Find and set LD_LIBRARY_PATH for libstdc++
-LIB_PATH=$(find /nix/store -name libstdc++.so.6 -type f 2>/dev/null | head -1 | xargs dirname)
-export LD_LIBRARY_PATH="${LIB_PATH}:${LD_LIBRARY_PATH}"
+# Find and set LD_LIBRARY_PATH for libstdc++ (only if found)
+LIB_FILE=$(find /nix/store -name libstdc++.so.6 -type f 2>/dev/null | head -1)
+if [ -n "$LIB_FILE" ]; then
+  export LD_LIBRARY_PATH="$(dirname "$LIB_FILE"):${LD_LIBRARY_PATH}"
+fi
 
 # Change to backend directory
 cd /app/backend
