@@ -1,11 +1,13 @@
-# Backend for Cloud Run (Firebase) - Python 3.11 + ffmpeg + FastAPI
+# Backend for Railway (or Cloud Run) - Python 3.11 + ffmpeg + FastAPI
+# Use Dockerfile to avoid Nixpacks libstdc++.so.6 issue with numpy/opencv
 FROM python:3.11-slim-bookworm
 
-# Install ffmpeg (required for video processing)
+# ffmpeg + OpenCV/numpy runtime deps (libstdc++ fixes "libstdc++.so.6: cannot open shared object")
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ffmpeg \
     libgl1-mesa-glx \
     libglib2.0-0 \
+    libstdc++6 \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -17,10 +19,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application
 COPY app/ ./app/
 
-# Cloud Run: only /tmp is writable; use Supabase/Postgres for DB
-ENV PORT=8080
+ENV PORT=8000
 ENV STORAGE_ROOT=/tmp/storage
-EXPOSE 8080
+EXPOSE 8000
 
-# Run with uvicorn; use 0.0.0.0 so Cloud Run can reach it
-CMD exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT}
+# Railway sets PORT at runtime
+CMD uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}
