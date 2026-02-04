@@ -9,4 +9,4 @@ cmds = [
 ]
 
 [start]
-cmd = "cd backend && find /nix/store -name libstdc++.so.6 -type f 2>/dev/null | head -1 | xargs dirname | xargs -I {} export LD_LIBRARY_PATH={}:$LD_LIBRARY_PATH && /app/venv/bin/python3 -m uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+cmd = "/app/backend/start.sh"
