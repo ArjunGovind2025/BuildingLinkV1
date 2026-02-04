@@ -1,8 +1,6 @@
 """Job model for video processing pipeline."""
 from datetime import datetime
-from sqlalchemy import Column, String, DateTime, Text, Integer
-from sqlalchemy.dialects.sqlite import JSON
-
+from sqlalchemy import Column, String, DateTime, Text, Integer, JSON
 from app.database import Base
 
 

@@ -5,6 +5,7 @@ uvicorn[standard]==0.32.1
 # Database
 sqlalchemy==2.0.36
 alembic==1.14.0
+psycopg2-binary==2.9.10
 
 # Media
 opencv-python-headless==4.10.0.84

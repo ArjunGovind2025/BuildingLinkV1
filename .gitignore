@@ -1,10 +1,14 @@
 storage/
+.firebase/
 *.pyc
 __pycache__/
 .env
+.env.local
+frontend/.env.local
 .venv/
 venv/
 node_modules/
 .next/
+frontend/out/
 *.db
 *.sqlite3

@@ -8,5 +8,6 @@ cmds = [
   "/app/venv/bin/pip install -r requirements.txt"
 ]
 
+# When Railway Root Directory = backend, app lives at /app (no /app/backend)
 [start]
-cmd = "/app/backend/start.sh"
+cmd = "/app/venv/bin/uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"

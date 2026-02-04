@@ -2,10 +2,12 @@
 
 This guide will help you deploy your Video to Acceptance Criteria application to public URLs.
 
+**Backend:** Deploy via **Railway + GitHub** (Firebase deploy removed). See **[RAILWAY_DEPLOY.md](./RAILWAY_DEPLOY.md)** for the full flow and local test step.
+
 ## Architecture
 
-- **Frontend**: Next.js app deployed on Vercel
-- **Backend**: FastAPI app deployed on Railway (or Render)
+- **Frontend**: Next.js app deployed on Vercel (or static export)
+- **Backend**: FastAPI app deployed on Railway via GitHub (or Render)
 
 ## Prerequisites
 

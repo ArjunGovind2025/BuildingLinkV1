@@ -19,12 +19,16 @@ def _mask_key(k: str | None) -> str:
 
 class Settings(BaseSettings):
     storage_root: Path = Path(os.getenv("STORAGE_ROOT", str(_PROJECT_ROOT / "storage"))).resolve()
-    max_upload_mb: int = 500
+    # Cloud Run max HTTP request size is 32MB; keep default 32 so uploads don't fail silently
+    max_upload_mb: int = 32
     allowed_video_types: set[str] = {"video/mp4", "video/webm"}
     openai_api_key: str | None = None
     openai_org_id: str | None = None  # optional; for multi-org or project keys
     openai_project_id: str | None = None  # optional; required for sk-proj- project keys
     redis_url: str | None = os.getenv("REDIS_URL")  # optional for ARQ
+    # Supabase (optional): set DATABASE_URL to Supabase Postgres connection string
+    supabase_url: str | None = os.getenv("SUPABASE_URL")
+    supabase_anon_key: str | None = os.getenv("SUPABASE_ANON_KEY")
 
     class Config:
         env_file = str(_ENV_PATH)

@@ -38,12 +38,9 @@ type JobResponse = {
   screenshots_analyzed?: number | null;
 };
 
-
 export default function JobPageClient() {
   const params = useParams();
-  // Handle both [id] and [[...slug]] route formats
-  const slug = params?.slug as string[] | string | undefined;
-  const jobId = typeof slug === "string" ? slug : Array.isArray(slug) ? slug[0] : "";
+  const jobId = typeof params?.id === "string" ? params.id : "";
   const [job, setJob] = useState<JobResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [regenerating, setRegenerating] = useState(false);

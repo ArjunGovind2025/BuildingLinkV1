@@ -1,12 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  async rewrites() {
-    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
-    return [
-      { source: '/api/:path*', destination: `${backendUrl}/api/:path*` },
-    ];
+  output: 'export',
+  distDir: 'out',
+  images: {
+    unoptimized: true,
   },
+  // Static export: set NEXT_PUBLIC_BACKEND_URL so API calls go to your backend (e.g. Railway).
 };
 
 module.exports = nextConfig;
